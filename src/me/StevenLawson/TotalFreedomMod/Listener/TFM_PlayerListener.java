@@ -791,6 +791,17 @@ public class TFM_PlayerListener implements Listener
         final String ip = TFM_Util.getIp(player);
         final TFM_Player playerEntry;
         TFM_Log.info("[JOIN] " + TFM_Util.formatPlayer(player) + " joined the game with IP address: " + ip, true);
+        
+        // Heal the player if they are dead on join
+        if (player.isDead())
+	    {
+	        player.setHealth(20.0);
+	        for(PotionEffect effect : player.getActivePotionEffects())
+            {
+	            player.removePotionEffect(effect.getType());
+            }
+        }
+        
         // Check absolute value to account for negatives
         if (Math.abs(player.getLocation().getX()) >= MAX_XY_COORD || Math.abs(player.getLocation().getZ()) >= MAX_XY_COORD)
         {
