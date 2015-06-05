@@ -773,13 +773,13 @@ public class TFM_PlayerListener implements Listener
         TFM_Log.info("[JOIN] " + TFM_Util.formatPlayer(player) + " joined the game with IP address: " + ip, true);
         
         if (player.isDead())
-	{
-	    player.setHealth(20.0);
-	    for(PotionEffect effect : player.getActivePotionEffects())
+        {
+            player.setHealth(20.0);
+            for(PotionEffect effect : player.getActivePotionEffects())
             {
-	        player.removePotionEffect(effect.getType());
+                player.removePotionEffect(effect.getType());
             }
-	}
+        }
 
         // Handle PlayerList entry (persistent)
         if (TFM_PlayerList.existsEntry(player))
