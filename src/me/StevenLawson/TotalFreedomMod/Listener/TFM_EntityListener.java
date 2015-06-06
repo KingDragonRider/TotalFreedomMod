@@ -179,4 +179,23 @@ public class TFM_EntityListener implements Listener
             }
         }
     }
+    
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onPotionSplash(PotionSplashEvent event)
+    {
+        if (TFM_ConfigEntry.BLOCK_DEATH_POTION.getBoolean())
+        {
+            ThrownPotion potion = event.getEntity();
+            Collection<PotionEffect> activePotionEffects = potion.getEffects();
+            Iterator<PotionEffect> iterator = activePotionEffects.iterator();
+            while (iterator.hasNext())
+            {
+                PotionEffect effect = iterator.next();
+                if (effect.getType().equals(PotionEffectType.HEAL) || effect.getType().equals(PotionEffectType.HEALTH_BOOST) || effect.getType().equals(PotionEffectType.HARM))
+                {
+                    event.setCancelled(true);
+                }
+            }
+        }
+    }
 }
